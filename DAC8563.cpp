@@ -1,3 +1,4 @@
+#include "WSerial.h"
 #include <SPI.h>
 #include "DAC8563.h"
 #include <Arduino.h>
@@ -33,7 +34,7 @@ void DAC8563::transfer(uint8_t cmd, uint16_t data){
 };
 
 void DAC8563::write_in_I_reg(char channel, uint16_t data){
-  if (channel != 'A' or channel != 'B' or channel != 'T') {
+  if (channel != 'A' and channel != 'B' and channel != 'T') {
     Serial.println("Incorrect channel selection. Use 'A', 'B', or 'T'.");
     return;
   }
@@ -47,8 +48,9 @@ void DAC8563::write_in_I_reg(char channel, uint16_t data){
 };
 
 void DAC8563::write_I_reg_update_regs(char channel, uint16_t data){
-  if (channel != 'A' or channel != 'B' or channel != 'T') {
+  if (channel != 'A' and channel != 'B' and channel != 'T') {
     Serial.println("Incorrect channel selection. Use 'A', 'B', or 'T'.");
+    Serial.print("Incorrect channel: "); Serial.println(channel);
     return;
   }
   if (channel == 'A') {
@@ -61,8 +63,9 @@ void DAC8563::write_I_reg_update_regs(char channel, uint16_t data){
 };
 
 void DAC8563::write_I_reg_update_dac_n(char channel, uint16_t data){
-  if (channel != 'A' or channel != 'B' or channel != 'T') {
+  if (channel != 'A' and channel != 'B' and channel != 'T') {
     Serial.println("Incorrect channel selection. Use 'A', 'B', or 'T'.");
+    Serial.print("Incorrect channel: "); Serial.println(channel);
     return;
   }
   if (channel == 'A') {
@@ -75,7 +78,7 @@ void DAC8563::write_I_reg_update_dac_n(char channel, uint16_t data){
 };
 
 void DAC8563::update_dac_n(char channel) {
-  if (channel != 'A' or channel != 'B' or channel != 'T') {
+  if (channel != 'A' and channel != 'B' and channel != 'T') {
     Serial.println("Incorrect channel selection. Use 'A', 'B', or 'T'.");
     return;
   }
@@ -90,7 +93,7 @@ void DAC8563::update_dac_n(char channel) {
 };
 
 void DAC8563::status_gain(int A, int B) {
-  if (A != 1 or A != 2 or B != 1 or B != 2) {
+  if (A != 1 and A != 2 or B != 1 and B != 2) {
     Serial.println("Incorrect A or B selection. Use '1' or '2'.");
     return;
   }
@@ -107,7 +110,7 @@ void DAC8563::status_gain(int A, int B) {
 };
 
 void DAC8563::power_up(char channel) {
-  if (channel != 'A' or channel != 'B' or channel != 'T') {
+  if (channel != 'A' and channel != 'B' and channel != 'T') {
     Serial.println("Incorrect channel selection. Use 'A', 'B', or 'T'.");
     return; 
   }
@@ -122,11 +125,11 @@ void DAC8563::power_up(char channel) {
 };
 
 void DAC8563::power_down(char channel, int mode) { // 1000 - Hi-z, 1 - 1kom, 100 - 100kom
-  if (channel != 'A' or channel != 'B' or channel != 'T') {
+  if (channel != 'A' and channel != 'B' and channel != 'T') {
     Serial.println("Incorrect channel selection. Use 'A', 'B', or 'T'.");
     return;
   }
-  if (mode != 1 or mode != 100 or mode != 1000) {
+  if (mode != 1 and mode != 100 and mode != 1000) {
     Serial.println("Incorrect mode selection. Use '1', '100', or '1000'.");
     return;
   }
@@ -170,7 +173,7 @@ void DAC8563::power_down_100kom(char channel) { // T - AB
 };
 
 void DAC8563::reset_regs(char mode){  // S - all registers, I - input regiters
-  if (mode != 'I' or mode != 'S') {
+  if (mode != 'I' and mode != 'S') {
     Serial.println("Incorrect mode selection. Use 'I' or 'S'.");
     return;
   }
@@ -183,7 +186,7 @@ void DAC8563::reset_regs(char mode){  // S - all registers, I - input regiters
 };
 
 void DAC8563::ldac_status(int A, int B) { // 1 - on, 2 - off
-  if (A != 1 or A != 2 or B != 1 or B != 2) {
+  if (A != 1 and A != 2 or B != 1 and B != 2) {
     Serial.println("Incorrect A or B selection. Use '1' or '2'.");
     return;
   }
@@ -201,7 +204,7 @@ void DAC8563::ldac_status(int A, int B) { // 1 - on, 2 - off
 
 
 void DAC8563::internal_reference(char mode) { // N - on, F - off
-  if (mode != 'N' or mode != 'F') {
+  if (mode != 'N' and mode != 'F') {
     Serial.println("Incorrect mode selection. Use 'N' or 'F'.");
     return;
   }
